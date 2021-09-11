@@ -1,6 +1,6 @@
 # Databricks notebook source
 # Python code to mount and access Azure Data Lake Storage Gen2 Account to Azure Databricks with Service Principal and OAuth
-# Author: Jatinder Aroar
+# Author: Jatinder Arora
 
 # Define the variables used for creating connection strings
 adlsAccountName = "adls2pigolu"
