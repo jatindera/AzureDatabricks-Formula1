@@ -35,3 +35,11 @@ if not any(mount.mountPoint == mountPoint for mount in dbutils.fs.mounts()):
     source = source,
     mount_point = mountPoint,
     extra_configs = configs)
+
+# COMMAND ----------
+
+dbutils.fs.ls(mountPoint)
+
+# COMMAND ----------
+
+
