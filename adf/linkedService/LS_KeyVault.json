@@ -1,0 +1,11 @@
+{
+	"name": "LS_KeyVault",
+	"properties": {
+		"description": "Linked Service for Key Vault",
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://pigolu-kv.vault.azure.net/"
+		}
+	}
+}
