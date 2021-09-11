@@ -7,15 +7,16 @@ adlsAccountName = "adls2pigolu"
 adlsContainerName = "raw"
 adlsFolderName = "formula1"
 mountPoint = "/mnt/raw/formula1"
+secretScopeName = "secretscope-pigolu-kv"
 
 # Application (Client) ID
-applicationId = dbutils.secrets.get(scope="secretscope-pigolu-kv",key="sp-pigolu-formula1-clientid")
+applicationId = dbutils.secrets.get(scope=secretScopeName,key="sp-pigolu-formula1-clientid")
 
 # Application (Client) Secret Key
-authenticationKey = dbutils.secrets.get(scope="secretscope-pigolu-kv",key="sp-pigolu-formula1-secret")
+authenticationKey = dbutils.secrets.get(scope=secretScopeName,key="sp-pigolu-formula1-secret")
 
 # Directory (Tenant) ID
-tenandId = dbutils.secrets.get(scope="CSVProjectKeyVault",key="tenantid")
+tenandId = dbutils.secrets.get(scope=secretScopeName,key="tenantid")
 
 endpoint = "https://login.microsoftonline.com/" + tenandId + "/oauth2/token"
 source = "abfss://" + adlsContainerName + "@" + adlsAccountName + ".dfs.core.windows.net/" + adlsFolderName
