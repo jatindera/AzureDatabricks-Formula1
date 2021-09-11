@@ -11,14 +11,6 @@ dbutils.secrets.get(scope="secretscope-pigolu-kv", key="sp-pigolu-formula1-clien
 
 # COMMAND ----------
 
-
-
-
-
-
-
-# COMMAND ----------
-
 # Python code to mount and access Azure Data Lake Storage Gen2 Account to Azure Databricks with Service Principal and OAuth
 # Author: Jatinder Arora
 def mountADLS2(adlsContainerName, adlsFolderName):
@@ -71,4 +63,15 @@ dbutils.fs.ls('/mnt/formula1/processed')
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ##Formula1 data is available at following URL for learning purpose ##
+# MAGIC #### http://ergast.com/mrd/ ####
 
+# COMMAND ----------
+
+dbutils.fs.mounts()
+
+# COMMAND ----------
+
+# unmount exmample
+# dbutils.fs.unmount('/mnt/formula1/raw')
