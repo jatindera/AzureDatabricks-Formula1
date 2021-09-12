@@ -46,12 +46,12 @@ def mountADLS2(adlsContainerName, adlsFolderName):
 # COMMAND ----------
 
 #mount formula1/raw
-mountADLS2('formula1', 'raw')
+mountADLS2('formula1', 'RAW')
 
 # COMMAND ----------
 
 #mount formula1/processed
-mountADLS2('formula1', 'processed')
+mountADLS2('formula1', 'TRANSFORMED')
 
 # COMMAND ----------
 
@@ -75,3 +75,4 @@ dbutils.fs.mounts()
 
 # unmount exmample
 # dbutils.fs.unmount('/mnt/formula1/raw')
+# dbutils.fs.unmount('/mnt/formula1/processed')
