@@ -16,6 +16,7 @@ dbutils.secrets.get(scope="secretscope-pigolu-kv", key="sp-pigolu-formula1-clien
 def mountADLS2(adlsContainerName, adlsFolderName):
   adlsAccountName = "adls2pigolu"
   secretScopeName = "secretscope-pigolu-kv"
+  adlsFolderName = adlsFolderName.lower()
   mountPoint = f'/mnt/{adlsContainerName}/{adlsFolderName}'
   # Application (Client) ID
   applicationId = dbutils.secrets.get(scope=secretScopeName,key="sp-pigolu-formula1-clientid")
@@ -27,6 +28,7 @@ def mountADLS2(adlsContainerName, adlsFolderName):
   tenandId = dbutils.secrets.get(scope=secretScopeName,key="tenantid")
 
   endpoint = f"https://login.microsoftonline.com/{tenandId}/oauth2/token"
+  adlsFolderName = adlsFolderName.upper()
   source = f"abfss://{adlsContainerName}@{adlsAccountName}.dfs.core.windows.net/{adlsFolderName}"
 
   # Connecting using Service Principal secrets and OAuth
@@ -55,11 +57,23 @@ mountADLS2('formula1', 'TRANSFORMED')
 
 # COMMAND ----------
 
+mountADLS2('formula1', 'CURATED')
+
+# COMMAND ----------
+
+dbutils.fs.mounts()
+
+# COMMAND ----------
+
 dbutils.fs.ls('/mnt/formula1/raw')
 
 # COMMAND ----------
 
-dbutils.fs.ls('/mnt/formula1/processed')
+dbutils.fs.ls('/mnt/formula1/transformed')
+
+# COMMAND ----------
+
+dbutils.fs.ls('/mnt/formula1/curated')
 
 # COMMAND ----------
 
@@ -69,10 +83,11 @@ dbutils.fs.ls('/mnt/formula1/processed')
 
 # COMMAND ----------
 
-dbutils.fs.mounts()
-
-# COMMAND ----------
-
 # unmount exmample
 # dbutils.fs.unmount('/mnt/formula1/raw')
 # dbutils.fs.unmount('/mnt/formula1/processed')
+# dbutils.fs.unmount('/mnt/formula1/transformed')
+
+# COMMAND ----------
+
+
