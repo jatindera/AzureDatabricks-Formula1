@@ -150,7 +150,7 @@ display(circuits_renamed_df)
 
 # COMMAND ----------
 
-from pyspark.sql.functions import current_timestamp(), lit
+from pyspark.sql.functions import current_timestamp, lit
 
 # COMMAND ----------
 
@@ -168,7 +168,7 @@ circuits_final_df = circuits_renamed_df.withColumn("ingestion_date", current_tim
 
 # COMMAND ----------
 
-dispaly(circuits_final_df)
+display(circuits_final_df)
 
 # COMMAND ----------
 
@@ -191,3 +191,7 @@ df = spark.read.parquet("/mnt/formula1/transformed/circuits")
 # COMMAND ----------
 
 display(df)
+
+# COMMAND ----------
+
+

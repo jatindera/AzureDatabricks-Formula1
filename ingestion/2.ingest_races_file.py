@@ -9,7 +9,7 @@
 
 # COMMAND ----------
 
-from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DoubleType
+from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DoubleType, TimestampType, DateType
 
 # COMMAND ----------
 
@@ -18,14 +18,14 @@ races_schema = StructType(fields=[StructField("raceId", IntegerType(), False),
                      StructField("round", IntegerType(), True),
                      StructField("circuitId", IntegerType(), True),
                      StructField("name", StringType(), True),
-                     StructField("date", TimestampType(), True),
-                     StructField("time", TimestampType(), True),
+                     StructField("date", DateType(), True),
+                     StructField("time", StringType(), True),
                      StructField("url", StringType(), True)
                     ])
 
 # COMMAND ----------
 
-races_df = spark.read.option("header", True).schema(races_schema).csv('dbfs:/mnt/formula1/raw/racess.csv')
+races_df = spark.read.option("header", True).schema(races_schema).csv('dbfs:/mnt/formula1/raw/races.csv')
 
 
 # COMMAND ----------
@@ -44,7 +44,21 @@ races_df.describe()
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### STEP 3 - Drop the URL column using Select Statement ###
+# MAGIC ## Step 3  - Add ingestion Date and race timestamp ##
+
+# COMMAND ----------
+
+from pyspark.sql.functions import current_timestamp, lit, to_timestamp, concat
+
+# COMMAND ----------
+
+races_with_timestamp_df = races_df.withColumn("ingestion_date", current_timestamp()) \
+                                 .withColumn("race_timestamp", to_timestamp(concat(col('date'), lit(' '), col('time')), 'yyyy-MM-dd HH:mm:ss' ))
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### STEP 4 - Drop the URL column using Select Statement ###
 
 # COMMAND ----------
 
@@ -52,11 +66,11 @@ from pyspark.sql.functions import col
 
 # COMMAND ----------
 
-races_selected_df = races_df.select(col('raceId'), col('year'), col('round'), col('circuitId'), col('name'), col('date'), col('time'))
+races_selected_df = races_with_timestamp_df.select(col('raceId'), col('year'), col('round'), col('circuitId'), col('name'), col('race_timestamp'))
 
 # COMMAND ----------
 
-display(races_selected_df)
+# display(races_selected_df)
 
 # COMMAND ----------
 
@@ -71,25 +85,16 @@ races_renamed_df = races_selected_df.withColumnRenamed('raceId', 'race_id') \
 
 # COMMAND ----------
 
-display(races_renamed_df)
+# display(races_renamed_df)
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Step 5 - Add Race Timestamp ##
+# MAGIC ## Step 6 - Add ingestion Date ##
 
 # COMMAND ----------
 
-from pyspark.sql.functions import current_timestamp(), lit
-
-# COMMAND ----------
-
-races_renamed_df = races_renamed_df.withColumn("race_timestamp", to_timestamp(concat(col('date'), lit(' '), col('time')), 'yyyy-MM-dd HH:mm:ss' ))
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## Step 5 - Add ingestion Date ##
+from pyspark.sql.functions import current_timestamp, lit, to_timestamp, concat
 
 # COMMAND ----------
 
@@ -97,7 +102,7 @@ races_final_df = races_renamed_df.withColumn("ingestion_date", current_timestamp
 
 # COMMAND ----------
 
-dispaly(races_final_df)
+# display(races_final_df)
 
 # COMMAND ----------
 
@@ -119,4 +124,8 @@ df = spark.read.parquet("/mnt/formula1/transformed/races")
 
 # COMMAND ----------
 
-display(df)
+# display(df)
+
+# COMMAND ----------
+
+
