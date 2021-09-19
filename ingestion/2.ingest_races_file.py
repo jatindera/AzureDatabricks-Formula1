@@ -111,7 +111,7 @@ races_final_df = races_renamed_df.withColumn("ingestion_date", current_timestamp
 
 # COMMAND ----------
 
-races_final_df.write.mode("overwrite").parquet("/mnt/formula1/transformed/races")
+races_final_df.write.mode("overwrite").partitionBy("race_year").parquet("/mnt/formula1/transformed/races")
 
 # COMMAND ----------
 
@@ -124,7 +124,7 @@ df = spark.read.parquet("/mnt/formula1/transformed/races")
 
 # COMMAND ----------
 
-# display(df)
+display(df)
 
 # COMMAND ----------
 
