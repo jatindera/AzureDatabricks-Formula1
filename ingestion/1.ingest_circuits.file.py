@@ -145,4 +145,49 @@ display(circuits_renamed_df)
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ## Step 5 - Add ingestion Date ##
 
+# COMMAND ----------
+
+from pyspark.sql.functions import current_timestamp(), lit
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### current_timestamp is of type col so same date is added against every row. To add a column with string value you need to use lit ####
+
+# COMMAND ----------
+
+#circuits_final_df = circuits_renamed_df.withColumn("ingestion_date", current_timestamp()) \
+# withColumn("env", lit("production"))
+
+# COMMAND ----------
+
+circuits_final_df = circuits_renamed_df.withColumn("ingestion_date", current_timestamp())
+
+# COMMAND ----------
+
+dispaly(circuits_final_df)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### Step 6 - Write data as Parquet ###
+
+# COMMAND ----------
+
+circuits_final_df.write.mode("overwrite").parquet("/mnt/formula1/transformed/circuits")
+
+# COMMAND ----------
+
+# MAGIC %fs
+# MAGIC ls /mnt/formula1/transformed/circuits
+
+# COMMAND ----------
+
+df = spark.read.parquet("/mnt/formula1/transformed/circuits")
+
+# COMMAND ----------
+
+display(df)
