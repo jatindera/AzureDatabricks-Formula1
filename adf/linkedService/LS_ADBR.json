@@ -1,0 +1,14 @@
+{
+	"name": "LS_ADBR",
+	"properties": {
+		"description": "Linked service for azuer databricks",
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-3197945889201846.6.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/6a45a144-9dae-4c1c-b992-cbb410ebb2d9/resourceGroups/pigolu-ds-and-ml/providers/Microsoft.Databricks/workspaces/pigolu-adb-ws",
+			"existingClusterId": "0911-091009-ads5"
+		}
+	}
+}
