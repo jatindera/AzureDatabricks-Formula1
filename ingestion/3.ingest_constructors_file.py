@@ -4,6 +4,11 @@
 
 # COMMAND ----------
 
+dbutils.widgets.text("p_data_source", "")
+data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC #### Step 1 - Read JSON file using the Spark Dataframe API ####
 
@@ -30,7 +35,7 @@ display(constructors_df)
 
 # COMMAND ----------
 
-constructors_dropped_df = consstructors_df.drop('url')
+constructors_dropped_df = constructors_df.drop('url')
 
 # COMMAND ----------
 
@@ -43,13 +48,14 @@ display(constructors_dropped_df)
 
 # COMMAND ----------
 
-import pyspark.sql.functions.current_timestamp
+from pyspark.sql.functions import current_timestamp, lit
 
 # COMMAND ----------
 
 constructor_final_df = constructors_dropped_df.withColumnRenamed("constructorId", "contructor_id") \
                                               .withColumnRenamed("constructorRef", "constructor_ref") \
-                                              .withColumn("ingestion_date", current_timestamp())
+                                              .withColumn("ingestion_date", current_timestamp()) \
+                                              .withColumn('data_source', lit(data_source))
 
 # COMMAND ----------
 
@@ -68,3 +74,7 @@ constructor_final_df.write.mode("overwrite").parquet("/mnt/formula1/transformed/
 
 # MAGIC %fs
 # MAGIC ls /mnt/formula1/transformed/constructors
+
+# COMMAND ----------
+
+dbutils.notebook.exit("Success")

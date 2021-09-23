@@ -4,6 +4,11 @@
 
 # COMMAND ----------
 
+dbutils.widgets.text("p_data_source", "")
+data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ## Step1 - Read the CSV file using the Spark dataframe reader ##
 
@@ -48,7 +53,7 @@ races_df.describe()
 
 # COMMAND ----------
 
-from pyspark.sql.functions import current_timestamp, lit, to_timestamp, concat
+from pyspark.sql.functions import current_timestamp, lit, to_timestamp, concat, col
 
 # COMMAND ----------
 
@@ -79,9 +84,14 @@ races_selected_df = races_with_timestamp_df.select(col('raceId'), col('year'), c
 
 # COMMAND ----------
 
+from pyspark.sql.functions import lit
+
+# COMMAND ----------
+
 races_renamed_df = races_selected_df.withColumnRenamed('raceId', 'race_id') \
 .withColumnRenamed('year', 'race_year') \
-.withColumnRenamed('circuitId', 'circuit_id')
+.withColumnRenamed('circuitId', 'circuit_id') \
+.withColumn('data_source', lit(data_source))
 
 # COMMAND ----------
 
@@ -125,6 +135,10 @@ df = spark.read.parquet("/mnt/formula1/transformed/races")
 # COMMAND ----------
 
 display(df)
+
+# COMMAND ----------
+
+dbutils.notebook.exit("Success")
 
 # COMMAND ----------
 

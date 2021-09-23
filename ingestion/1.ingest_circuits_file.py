@@ -4,6 +4,16 @@
 
 # COMMAND ----------
 
+dbutils.widgets.text("p_data_source", "")
+data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
+# MAGIC %run 
+# MAGIC "../includes/configuration"
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC #### Step1 - Read the CSV file using the Spark dataframe reader ####
 
@@ -57,7 +67,7 @@ circuites_schema = StructType(fields=[StructField("circuitId", IntegerType(), Fa
 
 # COMMAND ----------
 
-circuits_df = spark.read.option("header", True).schema(circuites_schema).csv('dbfs:/mnt/formula1/raw/circuits.csv')
+circuits_df = spark.read.option("header", True).schema(circuites_schema).csv(f'{raw_folder_path}/circuits.csv')
 
 
 # COMMAND ----------
@@ -133,11 +143,16 @@ display(circuits_selected_df)
 
 # COMMAND ----------
 
+from pyspark.sql.functions import current_timestamp, lit
+
+# COMMAND ----------
+
 circuits_renamed_df = circuits_selected_df.withColumnRenamed('circuitId', 'circuit_id') \
 .withColumnRenamed('circuitRef', 'circuit_ref') \
 .withColumnRenamed('lat', 'latitude') \
 .withColumnRenamed('lng', 'longitude') \
-.withColumnRenamed('alt', 'altitude')
+.withColumnRenamed('alt', 'altitude') \
+.withColumn('data_source', lit(data_source))
 
 # COMMAND ----------
 
@@ -147,10 +162,6 @@ display(circuits_renamed_df)
 
 # MAGIC %md
 # MAGIC ## Step 5 - Add ingestion Date ##
-
-# COMMAND ----------
-
-from pyspark.sql.functions import current_timestamp, lit
 
 # COMMAND ----------
 
@@ -177,7 +188,7 @@ display(circuits_final_df)
 
 # COMMAND ----------
 
-circuits_final_df.write.mode("overwrite").parquet("/mnt/formula1/transformed/circuits")
+circuits_final_df.write.mode("overwrite").parquet("f{transformed_folder_path}/circuits")
 
 # COMMAND ----------
 
@@ -186,7 +197,7 @@ circuits_final_df.write.mode("overwrite").parquet("/mnt/formula1/transformed/cir
 
 # COMMAND ----------
 
-df = spark.read.parquet("/mnt/formula1/transformed/circuits")
+df = spark.read.parquet(f"{transformed_folder_path}/circuits")
 
 # COMMAND ----------
 
@@ -194,4 +205,4 @@ display(df)
 
 # COMMAND ----------
 
-
+dbutils.notebook.exit("Success")
