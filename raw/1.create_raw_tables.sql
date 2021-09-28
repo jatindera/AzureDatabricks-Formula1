@@ -3,6 +3,14 @@ create database if not exists f1_raw
 
 -- COMMAND ----------
 
+desc database f1_raw
+
+-- COMMAND ----------
+
+desc database extended f1_raw
+
+-- COMMAND ----------
+
 -- MAGIC %md
 -- MAGIC ##### circuits table #####
 
@@ -53,7 +61,7 @@ date DATE,
 time STRING,
 url STRING)
 USING csv
-OPTIONS (path "/mnt/formula1dl/raw/races.csv", header true)
+OPTIONS (path "/mnt/formula1/raw/races.csv", header true)
 
 -- COMMAND ----------
 
@@ -81,7 +89,7 @@ name STRING,
 nationality STRING,
 url STRING)
 USING json
-OPTIONS(path "/mnt/formula1dl/raw/constructors.json")
+OPTIONS(path "/mnt/formula1/raw/constructors.json")
 
 -- COMMAND ----------
 
@@ -107,7 +115,7 @@ dob DATE,
 nationality STRING,
 url STRING)
 USING json
-OPTIONS (path "/mnt/formula1dl/raw/drivers.json")
+OPTIONS (path "/mnt/formula1/raw/drivers.json")
 
 -- COMMAND ----------
 
@@ -137,7 +145,7 @@ fastestLapTime STRING,
 fastestLapSpeed FLOAT,
 statusId STRING)
 USING json
-OPTIONS(path "/mnt/formula1dl/raw/results.json")
+OPTIONS(path "/mnt/formula1/raw/results.json")
 
 -- COMMAND ----------
 
@@ -162,7 +170,7 @@ raceId INT,
 stop INT,
 time STRING)
 USING json
-OPTIONS(path "/mnt/formula1dl/raw/pit_stops.json", multiLine true)
+OPTIONS(path "/mnt/formula1/raw/pit_stops.json", multiLine true)
 
 -- COMMAND ----------
 
@@ -192,7 +200,7 @@ time STRING,
 milliseconds INT
 )
 USING csv
-OPTIONS (path "/mnt/formula1dl/raw/lap_times")
+OPTIONS (path "/mnt/formula1/raw/lap_times")
 
 -- COMMAND ----------
 
@@ -220,7 +228,7 @@ q3 STRING,
 qualifyId INT,
 raceId INT)
 USING json
-OPTIONS (path "/mnt/formula1dl/raw/qualifying", multiLine true)
+OPTIONS (path "/mnt/formula1/raw/qualifying", multiLine true)
 
 -- COMMAND ----------
 

@@ -64,7 +64,11 @@ final_df = pit_stops_df.withColumnRenamed("driverId", "driver_id") \
 
 # COMMAND ----------
 
-final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/pit_stops")
+# final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/pit_stops")
+
+# COMMAND ----------
+
+final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.pit_stops")
 
 # COMMAND ----------
 

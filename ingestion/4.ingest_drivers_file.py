@@ -109,7 +109,11 @@ display(drivers_final_df)
 
 # COMMAND ----------
 
-drivers_final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/drivers")
+# drivers_final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/drivers")
+
+# COMMAND ----------
+
+drivers_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.drivers")
 
 # COMMAND ----------
 

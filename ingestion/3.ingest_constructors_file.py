@@ -73,7 +73,11 @@ display(constructor_final_df)
 
 # COMMAND ----------
 
-constructor_final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/constructors")
+# constructor_final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/constructors")
+
+# COMMAND ----------
+
+constructor_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.constructors")
 
 # COMMAND ----------
 

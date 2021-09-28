@@ -126,7 +126,11 @@ races_final_df = races_renamed_df.withColumn("ingestion_date", current_timestamp
 
 # COMMAND ----------
 
-races_final_df.write.mode("overwrite").partitionBy("race_year").parquet(f"{discovery_folder_path}/races")
+# races_final_df.write.mode("overwrite").partitionBy("race_year").parquet(f"{discovery_folder_path}/races")
+
+# COMMAND ----------
+
+races_final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.races")
 
 # COMMAND ----------
 

@@ -99,7 +99,11 @@ results_final_df = results_renamed_df.drop('statusId')
 
 # COMMAND ----------
 
-results_final_df.write.mode("overwrite").partitionBy("race_id").parquet(f"{discovery_folder_path}/results")
+# results_final_df.write.mode("overwrite").partitionBy("race_id").parquet(f"{discovery_folder_path}/results")
+
+# COMMAND ----------
+
+results_final_df.write.mode("overwrite").partitionBy("race_id").format("parquet").saveAsTable("f1_processed.results")
 
 # COMMAND ----------
 

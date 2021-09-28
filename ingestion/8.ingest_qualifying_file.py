@@ -68,7 +68,11 @@ final_df = qualifying_df.withColumnRenamed("qualifyId", "qualify_id") \
 
 # COMMAND ----------
 
-final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/qualifying")
+# final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/qualifying")
+
+# COMMAND ----------
+
+final_df.write.mode("overwrite").format("parquet").saveAsTable("f1_processed.qualifying")
 
 # COMMAND ----------
 
