@@ -88,11 +88,11 @@ final_df = lap_times_df.withColumnRenamed("driverId", "driver_id") \
 
 # COMMAND ----------
 
-final_df.write.mode("overwrite").parquet(f"{transformed_folder_path}/lap_times")
+final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/lap_times")
 
 # COMMAND ----------
 
-display(spark.read.parquet(f"{transformed_folder_path}/lap_times"))
+display(spark.read.parquet(f"{discovery_folder_path}/lap_times"))
 
 # COMMAND ----------
 

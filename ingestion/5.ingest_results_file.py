@@ -9,6 +9,11 @@ data_source = dbutils.widgets.get("p_data_source")
 
 # COMMAND ----------
 
+# MAGIC %run 
+# MAGIC "../includes/configuration"
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC #### Step 1 - Read JSON file using the Spark Dataframe API ####
 
@@ -41,7 +46,7 @@ results_schema = StructType(fields=[StructField("resultId", IntegerType(), False
 
 # COMMAND ----------
 
-results_df = spark.read.schema(results_schema).json("/mnt/formula1/raw/results.json")
+results_df = spark.read.schema(results_schema).json(f"{raw_folder_path}/results.json")
 
 # COMMAND ----------
 
@@ -94,16 +99,16 @@ results_final_df = results_renamed_df.drop('statusId')
 
 # COMMAND ----------
 
-results_final_df.write.mode("overwrite").partitionBy("race_id").parquet("/mnt/formula1/transformed/results")
+results_final_df.write.mode("overwrite").partitionBy("race_id").parquet(f"{discovery_folder_path}/results")
 
 # COMMAND ----------
 
 # MAGIC %fs
-# MAGIC ls /mnt/formula1/transformed/results
+# MAGIC ls /mnt/formula1/discovery/results
 
 # COMMAND ----------
 
-display(spark.read.parquet("/mnt/formula1/transformed/results"))
+display(spark.read.parquet(f"{discovery_folder_path}/results"))
 
 # COMMAND ----------
 

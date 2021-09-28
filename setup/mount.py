@@ -53,7 +53,7 @@ mountADLS2('formula1', 'RAW')
 # COMMAND ----------
 
 #mount formula1/processed
-mountADLS2('formula1', 'TRANSFORMED')
+mountADLS2('formula1', 'DISCOVERY')
 
 # COMMAND ----------
 
@@ -69,7 +69,7 @@ dbutils.fs.ls('/mnt/formula1/raw')
 
 # COMMAND ----------
 
-dbutils.fs.ls('/mnt/formula1/transformed')
+dbutils.fs.ls('/mnt/formula1/discovery')
 
 # COMMAND ----------
 
@@ -85,9 +85,9 @@ dbutils.fs.ls('/mnt/formula1/curated')
 
 # unmount exmample
 # dbutils.fs.unmount('/mnt/formula1/raw')
-# dbutils.fs.unmount('/mnt/formula1/processed')
+dbutils.fs.unmount('/mnt/formula1/processed')
 # dbutils.fs.unmount('/mnt/formula1/transformed')
 
 # COMMAND ----------
 
-
+# 

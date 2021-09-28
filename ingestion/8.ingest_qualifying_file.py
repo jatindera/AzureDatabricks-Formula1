@@ -68,11 +68,11 @@ final_df = qualifying_df.withColumnRenamed("qualifyId", "qualify_id") \
 
 # COMMAND ----------
 
-final_df.write.mode("overwrite").parquet(f"{transformed_folder_path}/qualifying")
+final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/qualifying")
 
 # COMMAND ----------
 
-display(spark.read.parquet(f'{transformed_folder_path}/qualifying'))
+display(spark.read.parquet(f'{discovery_folder_path}/qualifying'))
 
 # COMMAND ----------
 

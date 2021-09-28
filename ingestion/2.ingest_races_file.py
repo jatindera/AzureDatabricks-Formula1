@@ -9,6 +9,11 @@ data_source = dbutils.widgets.get("p_data_source")
 
 # COMMAND ----------
 
+# MAGIC %run 
+# MAGIC "../includes/configuration"
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ## Step1 - Read the CSV file using the Spark dataframe reader ##
 
@@ -30,7 +35,7 @@ races_schema = StructType(fields=[StructField("raceId", IntegerType(), False),
 
 # COMMAND ----------
 
-races_df = spark.read.option("header", True).schema(races_schema).csv('dbfs:/mnt/formula1/raw/races.csv')
+races_df = spark.read.option("header", True).schema(races_schema).csv(f'{raw_folder_path}/races.csv')
 
 
 # COMMAND ----------
@@ -121,16 +126,16 @@ races_final_df = races_renamed_df.withColumn("ingestion_date", current_timestamp
 
 # COMMAND ----------
 
-races_final_df.write.mode("overwrite").partitionBy("race_year").parquet("/mnt/formula1/transformed/races")
+races_final_df.write.mode("overwrite").partitionBy("race_year").parquet(f"{discovery_folder_path}/races")
 
 # COMMAND ----------
 
 # MAGIC %fs
-# MAGIC ls /mnt/formula1/transformed/races
+# MAGIC ls /mnt/formula1/discovery/races
 
 # COMMAND ----------
 
-df = spark.read.parquet("/mnt/formula1/transformed/races")
+df = spark.read.parquet(f"{discovery_folder_path}/races")
 
 # COMMAND ----------
 

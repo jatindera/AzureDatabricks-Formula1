@@ -188,16 +188,16 @@ display(circuits_final_df)
 
 # COMMAND ----------
 
-circuits_final_df.write.mode("overwrite").parquet("f{transformed_folder_path}/circuits")
+circuits_final_df.write.mode("overwrite").parquet("f{discovery_folder_path}/circuits")
 
 # COMMAND ----------
 
 # MAGIC %fs
-# MAGIC ls /mnt/formula1/transformed/circuits
+# MAGIC ls /mnt/formula1/discovery/circuits
 
 # COMMAND ----------
 
-df = spark.read.parquet(f"{transformed_folder_path}/circuits")
+df = spark.read.parquet(f"{discovery_folder_path}/circuits")
 
 # COMMAND ----------
 

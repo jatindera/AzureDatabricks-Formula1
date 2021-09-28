@@ -5,7 +5,8 @@
 # COMMAND ----------
 
 raw_folder_path = '/mnt/formula1/raw'
-transformed_folder_path = '/mnt/formula1/transformed'
+discovery_folder_path = '/mnt/formula1/discovery'
+curated_folder_path = '/mnt/formula1/curated'
 
 # COMMAND ----------
 

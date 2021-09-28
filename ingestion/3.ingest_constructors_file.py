@@ -9,6 +9,11 @@ data_source = dbutils.widgets.get("p_data_source")
 
 # COMMAND ----------
 
+# MAGIC %run 
+# MAGIC "../includes/configuration"
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC #### Step 1 - Read JSON file using the Spark Dataframe API ####
 
@@ -18,7 +23,7 @@ constructors_schema = "constructorId INT, constructorRef STRING,  name STRING, n
 
 # COMMAND ----------
 
-constructors_df = spark.read.schema(constructors_schema).json("/mnt/formula1/raw/constructors.json")
+constructors_df = spark.read.schema(constructors_schema).json(f"{raw_folder_path}/constructors.json")
 
 # COMMAND ----------
 
@@ -52,7 +57,7 @@ from pyspark.sql.functions import current_timestamp, lit
 
 # COMMAND ----------
 
-constructor_final_df = constructors_dropped_df.withColumnRenamed("constructorId", "contructor_id") \
+constructor_final_df = constructors_dropped_df.withColumnRenamed("constructorId", "constructor_id") \
                                               .withColumnRenamed("constructorRef", "constructor_ref") \
                                               .withColumn("ingestion_date", current_timestamp()) \
                                               .withColumn('data_source', lit(data_source))
@@ -68,12 +73,16 @@ display(constructor_final_df)
 
 # COMMAND ----------
 
-constructor_final_df.write.mode("overwrite").parquet("/mnt/formula1/transformed/constructors")
+constructor_final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/constructors")
 
 # COMMAND ----------
 
 # MAGIC %fs
-# MAGIC ls /mnt/formula1/transformed/constructors
+# MAGIC ls /mnt/formula1/discovery/constructors
+
+# COMMAND ----------
+
+display(spark.read.parquet(f"{discovery_folder_path}/constructors"))
 
 # COMMAND ----------
 

@@ -9,6 +9,11 @@ data_source = dbutils.widgets.get("p_data_source")
 
 # COMMAND ----------
 
+# MAGIC %run 
+# MAGIC "../includes/configuration"
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC #### Step 1 - Read JSON file using the Spark Dataframe API ####
 
@@ -37,7 +42,7 @@ drivers_schema = StructType(fields=[StructField("driverId", IntegerType(), False
 
 # COMMAND ----------
 
-drivers_df = spark.read.schema(drivers_schema).json("/mnt/formula1/raw/drivers.json")
+drivers_df = spark.read.schema(drivers_schema).json(f"{raw_folder_path}/drivers.json")
 
 # COMMAND ----------
 
@@ -83,7 +88,7 @@ display(drivers_renamed_df)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC #### Step 4 - Transformed Name ####
+# MAGIC #### Step 4 - discovery Name ####
 
 # COMMAND ----------
 
@@ -104,16 +109,16 @@ display(drivers_final_df)
 
 # COMMAND ----------
 
-drivers_final_df.write.mode("overwrite").parquet("/mnt/formula1/transformed/drivers")
+drivers_final_df.write.mode("overwrite").parquet(f"{discovery_folder_path}/drivers")
 
 # COMMAND ----------
 
 # MAGIC %fs
-# MAGIC ls /mnt/formula1/transformed/drivers
+# MAGIC ls /mnt/formula1/discovery/drivers
 
 # COMMAND ----------
 
-display(spark.read.parquet("/mnt/formula1/transformed/drivers"))
+display(spark.read.parquet(f"{discovery_folder_path}/drivers"))
 
 # COMMAND ----------
 
