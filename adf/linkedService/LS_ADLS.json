@@ -2,12 +2,6 @@
 	"name": "LS_ADLS",
 	"properties": {
 		"description": "Linked service to connect to ADLS",
-		"parameters": {
-			"container_name": {
-				"type": "string",
-				"defaultValue": "dev"
-			}
-		},
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
