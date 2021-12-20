@@ -15,7 +15,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "http://www.google.com",
+					"url": {
+						"value": "@pipeline().parameters.pl_base_url",
+						"type": "Expression"
+					},
 					"method": "GET",
 					"linkedServices": [
 						{
