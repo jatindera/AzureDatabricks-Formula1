@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get All Circuits",
+				"name": "Web1",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
@@ -15,11 +15,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": {
-						"value": "@pipeline().parameters.URL_Circuits",
-						"type": "Expression"
-					},
-					"method": "GET"
+					"method": "GET",
+					"datasets": [
+						{
+							"referenceName": "DS_XML",
+							"type": "DatasetReference"
+						}
+					]
 				}
 			}
 		],

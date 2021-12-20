@@ -1,0 +1,28 @@
+{
+	"name": "DS_XML",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_HTTP",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"base_url": {
+					"value": "@dataset().base_url",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"base_url": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "Xml",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "circuits"
+			}
+		}
+	}
+}
