@@ -40,11 +40,6 @@
 				"type": "String"
 			}
 		},
-		"variables": {
-			"var_url_circuits": {
-				"type": "String"
-			}
-		},
 		"folder": {
 			"name": "Formula1"
 		},
