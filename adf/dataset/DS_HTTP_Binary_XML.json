@@ -1,5 +1,5 @@
 {
-	"name": "DS_Binary_XML",
+	"name": "DS_HTTP_Binary_XML",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_HTTP",
