@@ -44,15 +44,16 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['Column_1']"
+									"path": "$['Circuit_Name']"
 								},
 								"sink": {
+									"type": "String",
 									"ordinal": 1
 								}
 							}
 						],
 						"collectionReference": "$['MRData']['CircuitTable']['Circuit']",
-						"mapComplexValuesToString": false
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
