@@ -15,7 +15,19 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"method": "GET"
+					"method": "GET",
+					"linkedServices": [
+						{
+							"referenceName": "LS_HTTP",
+							"type": "LinkedServiceReference"
+						}
+					],
+					"datasets": [
+						{
+							"referenceName": "DS_Circuits",
+							"type": "DatasetReference"
+						}
+					]
 				}
 			}
 		],
