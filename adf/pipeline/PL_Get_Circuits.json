@@ -31,11 +31,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"URL_Circuits": {
-				"type": "String"
-			}
-		},
 		"folder": {
 			"name": "Formula1"
 		},
