@@ -50,6 +50,15 @@
 									"type": "String",
 									"ordinal": 1
 								}
+							},
+							{
+								"source": {
+									"path": "$['Column_1']"
+								},
+								"sink": {
+									"type": "String",
+									"ordinal": 2
+								}
 							}
 						],
 						"collectionReference": "$['MRData']['CircuitTable']['Circuit']",
