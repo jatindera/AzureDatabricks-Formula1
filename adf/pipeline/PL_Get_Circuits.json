@@ -3,11 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy XML to ADLS as CSV",
-				"type": "Copy",
+				"name": "dataflow1",
+				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "7.00:00:00",
+					"timeout": "1.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -15,78 +15,16 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "XmlSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "XmlReadSettings",
-							"validationMode": "none",
-							"namespaces": true
-						}
+					"dataflow": {
+						"referenceName": "dataflow1",
+						"type": "DataFlowReference"
 					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['Circuit_Name']"
-								},
-								"sink": {
-									"type": "String",
-									"ordinal": 1
-								}
-							},
-							{
-								"source": {
-									"path": "$['Column_1']"
-								},
-								"sink": {
-									"type": "String",
-									"ordinal": 2
-								}
-							}
-						],
-						"collectionReference": "$['MRData']['CircuitTable']['Circuit']",
-						"mapComplexValuesToString": true
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "DS_HTTP_XML",
-						"type": "DatasetReference",
-						"parameters": {
-							"base_url": {
-								"value": "@pipeline().parameters.pl_base_url",
-								"type": "Expression"
-							},
-							"relative_url": {
-								"value": "@pipeline().parameters.pl_relative_url",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "DS_ADLS2_CSV",
-						"type": "DatasetReference"
-					}
-				]
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"parameters": {
