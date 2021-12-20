@@ -1,0 +1,18 @@
+{
+	"name": "DS_ADLS2_Binary_XML",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "RAW",
+				"fileSystem": "formula1"
+			}
+		}
+	}
+}
