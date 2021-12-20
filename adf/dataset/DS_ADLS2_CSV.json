@@ -1,0 +1,23 @@
+{
+	"name": "DS_ADLS2_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "RAW",
+				"fileSystem": "formula1"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
