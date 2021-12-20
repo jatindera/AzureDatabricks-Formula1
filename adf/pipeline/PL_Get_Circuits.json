@@ -15,6 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"url": "http://www.google.com",
 					"method": "GET",
 					"linkedServices": [
 						{
