@@ -3,13 +3,31 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_HTTP",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"base_url": {
+					"value": "@dataset().base_url",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"base_url": {
+				"type": "string"
+			},
+			"relative_url": {
+				"type": "string"
+			}
 		},
 		"annotations": [],
 		"type": "Xml",
 		"typeProperties": {
 			"location": {
-				"type": "HttpServerLocation"
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().relative_url",
+					"type": "Expression"
+				}
 			}
 		}
 	}
