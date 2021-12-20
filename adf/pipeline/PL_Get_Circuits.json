@@ -3,36 +3,9 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Circuits XML",
-				"type": "WebActivity",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"url": {
-						"value": "@concat(pipeline().parameters.pl_base_url, pipeline().parameters.pl_relative_url)",
-						"type": "Expression"
-					},
-					"method": "GET"
-				}
-			},
-			{
 				"name": "Copy XML to ADLS as CSV",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Get Circuits XML",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -54,6 +27,17 @@
 							"namespaces": true
 						}
 					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
 					"enableStaging": false
 				},
 				"inputs": [
@@ -70,6 +54,12 @@
 								"type": "Expression"
 							}
 						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS2_CSV",
+						"type": "DatasetReference"
 					}
 				]
 			}
