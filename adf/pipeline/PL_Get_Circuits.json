@@ -19,19 +19,7 @@
 						"value": "@pipeline().parameters.URL_Circuits",
 						"type": "Expression"
 					},
-					"method": "GET",
-					"linkedServices": [
-						{
-							"referenceName": "LS_HTTP",
-							"type": "LinkedServiceReference"
-						}
-					],
-					"datasets": [
-						{
-							"referenceName": "DS_Circuits",
-							"type": "DatasetReference"
-						}
-					]
+					"method": "GET"
 				}
 			}
 		],
