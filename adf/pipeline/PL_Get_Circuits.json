@@ -16,6 +16,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "GET",
+					"linkedServices": [
+						{
+							"referenceName": "LS_HTTP",
+							"type": "LinkedServiceReference"
+						}
+					],
 					"datasets": [
 						{
 							"referenceName": "DS_XML",
