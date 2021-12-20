@@ -42,7 +42,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_XML",
+						"referenceName": "DS_HTTP_XML",
 						"type": "DatasetReference",
 						"parameters": {
 							"base_url": {
