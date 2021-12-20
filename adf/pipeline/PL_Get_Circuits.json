@@ -16,26 +16,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": {
-						"value": "@pipeline().parameters.pl_base_url",
+						"value": "@concat(pipeline().parameters.pl_base_url, pipeline().parameters.pl_relative_url)",
 						"type": "Expression"
 					},
-					"method": "GET",
-					"datasets": [
-						{
-							"referenceName": "DS_XML",
-							"type": "DatasetReference",
-							"parameters": {
-								"base_url": {
-									"value": "@pipeline().parameters.pl_base_url",
-									"type": "Expression"
-								},
-								"relative_url": {
-									"value": "@pipeline().parameters.pl_relative_url",
-									"type": "Expression"
-								}
-							}
-						}
-					]
+					"method": "GET"
 				}
 			}
 		],
