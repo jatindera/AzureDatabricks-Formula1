@@ -52,7 +52,13 @@
 				"outputs": [
 					{
 						"referenceName": "DS_ADLS2_Binary_XML",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"circuits_file_name": {
+								"value": "@pipeline().parameters.pl_circuits_file_name",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
@@ -65,6 +71,10 @@
 			"pl_relative_url": {
 				"type": "string",
 				"defaultValue": "circuits"
+			},
+			"pl_circuits_file_name": {
+				"type": "String",
+				"defaultValue": "circuits.xml"
 			}
 		},
 		"folder": {
