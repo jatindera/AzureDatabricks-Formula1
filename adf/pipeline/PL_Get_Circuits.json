@@ -15,6 +15,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.URL_Circuits",
+						"type": "Expression"
+					},
 					"method": "GET",
 					"linkedServices": [
 						{
@@ -31,6 +35,16 @@
 				}
 			}
 		],
+		"parameters": {
+			"URL_Circuits": {
+				"type": "String"
+			}
+		},
+		"variables": {
+			"var_url_circuits": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "Formula1"
 		},
