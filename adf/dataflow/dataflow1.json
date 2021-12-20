@@ -5,7 +5,11 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"name": "source1"
+					"dataset": {
+						"referenceName": "DS_ADLS_XML",
+						"type": "DatasetReference"
+					},
+					"name": "CircuitsXmlADLS"
 				}
 			],
 			"sinks": [
@@ -15,10 +19,10 @@
 			],
 			"transformations": [
 				{
-					"name": "Parse1"
+					"name": "ParseXML"
 				}
 			],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100) ~> source1\nsource1 parse(format: 'xml',\n\tnamespaces: true) ~> Parse1\nParse1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpreCommands: [],\n\tpostCommands: []) ~> sink1"
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false,\n\tvalidationMode: 'none',\n\tnamespaces: true) ~> CircuitsXmlADLS\nCircuitsXmlADLS parse(format: 'xml',\n\tnamespaces: true) ~> ParseXML\nParseXML sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpreCommands: [],\n\tpostCommands: []) ~> sink1"
 		}
 	}
 }

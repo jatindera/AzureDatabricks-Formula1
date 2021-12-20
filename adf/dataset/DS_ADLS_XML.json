@@ -1,0 +1,19 @@
+{
+	"name": "DS_ADLS_XML",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLS2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Xml",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "circuits.xml",
+				"folderPath": "RAW",
+				"fileSystem": "formula1"
+			}
+		}
+	}
+}
