@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Web1",
+				"name": "Get Circuits XML",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
