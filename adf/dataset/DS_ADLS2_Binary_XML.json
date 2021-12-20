@@ -1,5 +1,5 @@
 {
-	"name": "DS_ADLS2_XML",
+	"name": "DS_ADLS2_Binary_XML",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_ADLS2",
