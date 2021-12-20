@@ -4,7 +4,8 @@
 		"description": "Linked Service to get F1 data from Ergast",
 		"parameters": {
 			"base_url": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "http://ergast.com/api/f1/"
 			}
 		},
 		"annotations": [],
