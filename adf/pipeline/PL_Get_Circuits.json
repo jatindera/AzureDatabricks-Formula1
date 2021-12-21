@@ -25,6 +25,48 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "Save Circuits XML on ADLS2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_HTTP_Binary_XML",
+						"type": "DatasetReference",
+						"parameters": {
+							"base_url": {
+								"value": "@pipeline().parameters.pl_base_url",
+								"type": "Expression"
+							},
+							"relative_url": {
+								"value": "@pipeline().parameters.pl_relative_url",
+								"type": "Expression"
+							}
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
