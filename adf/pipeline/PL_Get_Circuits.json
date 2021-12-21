@@ -3,11 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy Circuits XML to ADLS2",
-				"type": "Copy",
+				"name": "DF_Circuits",
+				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "7.00:00:00",
+					"timeout": "1.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -15,52 +15,16 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "BinarySource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "BinaryReadSettings"
-						}
+					"dataflow": {
+						"referenceName": "DF_CIRCUITS_XML_TO_CSV",
+						"type": "DataFlowReference"
 					},
-					"sink": {
-						"type": "BinarySink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						}
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
 					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "DS_HTTP_Binary_XML",
-						"type": "DatasetReference",
-						"parameters": {
-							"base_url": {
-								"value": "@pipeline().parameters.pl_base_url",
-								"type": "Expression"
-							},
-							"relative_url": {
-								"value": "@pipeline().parameters.pl_relative_url",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "DS_ADLS2_Binary_XML",
-						"type": "DatasetReference",
-						"parameters": {
-							"circuits_file_name": {
-								"value": "@pipeline().parameters.pl_circuits_file_name",
-								"type": "Expression"
-							}
-						}
-					}
-				]
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"parameters": {
