@@ -63,6 +63,12 @@
 				]
 			}
 		],
+		"parameters": {
+			"base_url": {
+				"type": "string",
+				"defaultValue": "http://ergast.com/api/f1/"
+			}
+		},
 		"folder": {
 			"name": "Formula1"
 		},
