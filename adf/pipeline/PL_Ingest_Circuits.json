@@ -35,6 +35,16 @@
 				]
 			}
 		],
+		"parameters": {
+			"pl_base_url": {
+				"type": "string",
+				"defaultValue": "https://ergast.com/api/f1/"
+			},
+			"pl_relative_url": {
+				"type": "string",
+				"defaultValue": "circuits.json?limit=100"
+			}
+		},
 		"folder": {
 			"name": "Formula1"
 		},
