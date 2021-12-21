@@ -41,21 +41,33 @@
 							{
 								"source": {
 									"path": "$['userId']"
+								},
+								"sink": {
+									"path": "userId"
 								}
 							},
 							{
 								"source": {
 									"path": "$['id']"
+								},
+								"sink": {
+									"path": "id"
 								}
 							},
 							{
 								"source": {
 									"path": "$['title']"
+								},
+								"sink": {
+									"path": "title"
 								}
 							},
 							{
 								"source": {
 									"path": "$['body']"
+								},
+								"sink": {
+									"path": "body"
 								}
 							}
 						],
