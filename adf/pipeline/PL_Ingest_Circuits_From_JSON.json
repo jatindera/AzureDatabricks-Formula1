@@ -41,7 +41,7 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitName']"
+									"path": "['circuitName']"
 								},
 								"sink": {
 									"name": "circuitName"
