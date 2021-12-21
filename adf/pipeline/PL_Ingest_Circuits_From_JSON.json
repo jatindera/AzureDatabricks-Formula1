@@ -34,7 +34,48 @@
 							"filePattern": "arrayOfObjects"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitId']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['url']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitName']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['lat']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['long']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['locality']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['country']"
+								}
+							}
+						],
+						"collectionReference": ""
+					}
 				},
 				"inputs": [
 					{
