@@ -36,75 +36,7 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitId']"
-								},
-								"sink": {
-									"name": "circuitId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['url']"
-								},
-								"sink": {
-									"name": "MRData_CircuitTable_Circuits'][0]['url",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitName']"
-								},
-								"sink": {
-									"name": "circuitName",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['lat']"
-								},
-								"sink": {
-									"name": "lat",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['long']"
-								},
-								"sink": {
-									"name": "long",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['locality']"
-								},
-								"sink": {
-									"name": "locality",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['country']"
-								},
-								"sink": {
-									"name": "country",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
