@@ -3,83 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Save JSON as CSV to ADLS2",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Save JSON to ADLS2",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "DS_ADLS2_CSV",
-						"type": "DatasetReference",
-						"parameters": {
-							"file_name": {
-								"value": "@pipeline().parameters.pl_file_name_json",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "DS_ADLS2_CSV",
-						"type": "DatasetReference",
-						"parameters": {
-							"file_name": {
-								"value": "@pipeline().parameters.pl_file_name_csv",
-								"type": "Expression"
-							}
-						}
-					}
-				]
-			},
-			{
 				"name": "Save JSON to ADLS2",
 				"type": "Copy",
 				"dependsOn": [],
@@ -92,16 +15,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
 					"sink": {
 						"type": "JsonSink",
 						"storeSettings": {
@@ -114,22 +27,6 @@
 					},
 					"enableStaging": false
 				},
-				"inputs": [
-					{
-						"referenceName": "DS_HTTP_JSON",
-						"type": "DatasetReference",
-						"parameters": {
-							"base_url": {
-								"value": "@pipeline().parameters.pl_base_url",
-								"type": "Expression"
-							},
-							"relative_url": {
-								"value": "@pipeline().parameters.pl_relative_url",
-								"type": "Expression"
-							}
-						}
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "DS_ADLS2_JSON",
