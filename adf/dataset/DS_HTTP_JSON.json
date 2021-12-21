@@ -5,6 +5,14 @@
 			"referenceName": "LS_HTTP",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"base_url": {
+				"type": "string"
+			},
+			"relative_url": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
