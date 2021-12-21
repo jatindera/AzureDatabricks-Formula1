@@ -67,6 +67,14 @@
 			"base_url": {
 				"type": "string",
 				"defaultValue": "http://ergast.com/api/f1/"
+			},
+			"pl_relative_url_json": {
+				"type": "string",
+				"defaultValue": "circuits.json?limit=100"
+			},
+			"pl_circuits_file_name": {
+				"type": "string",
+				"defaultValue": "circuits.csv"
 			}
 		},
 		"folder": {
