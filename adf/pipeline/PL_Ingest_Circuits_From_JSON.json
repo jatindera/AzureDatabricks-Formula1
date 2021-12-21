@@ -53,7 +53,8 @@
 									"path": "['circuitName']"
 								},
 								"sink": {
-									"name": "name"
+									"name": "name",
+									"type": "String"
 								}
 							},
 							{
