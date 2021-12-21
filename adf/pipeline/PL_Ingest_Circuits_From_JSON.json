@@ -34,26 +34,7 @@
 							"filePattern": "setOfObjects"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['locality']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['country']"
-								},
-								"sink": {
-									"path": "country"
-								}
-							}
-						],
-						"collectionReference": "$['MRData']['CircuitTable']['Circuits']"
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
