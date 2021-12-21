@@ -64,7 +64,7 @@
 			}
 		],
 		"parameters": {
-			"base_url": {
+			"pl_base_url": {
 				"type": "string",
 				"defaultValue": "http://ergast.com/api/f1/"
 			},
