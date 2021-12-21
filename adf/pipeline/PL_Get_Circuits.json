@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DF_Circuits",
+				"name": "Circuits XML to CSV",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
