@@ -120,7 +120,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"file_name": {
-								"value": "@pipeline().parameters.pl_file_name_json",
+								"value": "@pipeline().parameters.pl_file_name_csv",
 								"type": "Expression"
 							}
 						}
