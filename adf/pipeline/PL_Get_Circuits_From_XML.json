@@ -74,7 +74,7 @@
 								"type": "Expression"
 							},
 							"relative_url": {
-								"value": "@pipeline().parameters.pl_relative_url",
+								"value": "@pipeline().parameters.pl_relative_url_xml",
 								"type": "Expression"
 							}
 						}
