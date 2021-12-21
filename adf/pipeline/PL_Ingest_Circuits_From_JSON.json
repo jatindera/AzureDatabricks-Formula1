@@ -44,7 +44,8 @@
 									"path": "['circuitId']"
 								},
 								"sink": {
-									"name": "circuitRef"
+									"name": "circuitRef",
+									"type": "String"
 								}
 							},
 							{
@@ -52,7 +53,8 @@
 									"path": "['url']"
 								},
 								"sink": {
-									"name": "url"
+									"name": "url",
+									"type": "String"
 								}
 							},
 							{
@@ -60,7 +62,8 @@
 									"path": "['circuitName']"
 								},
 								"sink": {
-									"name": "circuitName"
+									"name": "circuitName",
+									"type": "String"
 								}
 							},
 							{
@@ -68,7 +71,8 @@
 									"path": "['lat']"
 								},
 								"sink": {
-									"name": "lat"
+									"name": "lat",
+									"type": "Double"
 								}
 							},
 							{
@@ -76,7 +80,8 @@
 									"path": "['long']"
 								},
 								"sink": {
-									"name": "lng"
+									"name": "lng",
+									"type": "Double"
 								}
 							},
 							{
@@ -84,7 +89,8 @@
 									"path": "['locality']"
 								},
 								"sink": {
-									"name": "location"
+									"name": "location",
+									"type": "String"
 								}
 							},
 							{
@@ -92,7 +98,8 @@
 									"path": "['country']"
 								},
 								"sink": {
-									"name": "country"
+									"name": "country",
+									"type": "String"
 								}
 							}
 						],
