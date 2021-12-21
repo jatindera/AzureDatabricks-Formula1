@@ -1,0 +1,12 @@
+{
+	"name": "DS_REST",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_REST",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
