@@ -18,10 +18,10 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "Flatten1"
+					"name": "FlattenCircuit"
 				}
 			],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'xml',\n\tfileSystem: 'formula1',\n\tfolderPath: 'RAW',\n\tfileName: 'circuits.xml',\n\tvalidationMode: 'none',\n\tnamespaces: true,\n\tnamespacePrefixes: ['http://ergast.com/mrd/1.4'->'CR']) ~> XMLFromADLS2\nXMLFromADLS2 foldDown(unroll(),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten1"
+			"script": "source(output(\n\t\t{CR:MRData} as ({@limit} as short, {@offset} as boolean, {@series} as string, {@total} as short, {@url} as string, {CR:CircuitTable} as ({CR:Circuit} as ({@circuitId} as string, {@url} as string, {CR:CircuitName} as string, {CR:Location} as ({@lat} as double, {@long} as double, {CR:Country} as string, {CR:Locality} as string))[]))\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'xml',\n\tfileSystem: 'formula1',\n\tfolderPath: 'RAW',\n\tfileName: 'circuits.xml',\n\tvalidationMode: 'none',\n\tnamespaces: true,\n\tnamespacePrefixes: ['http://ergast.com/mrd/1.4'->'CR']) ~> XMLFromADLS2\nXMLFromADLS2 foldDown(unroll(),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenCircuit"
 		}
 	}
 }
