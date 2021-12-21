@@ -50,50 +50,6 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['MRData']['xmlns']"
-								},
-								"sink": {
-									"name": "xmlns",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['series']"
-								},
-								"sink": {
-									"name": "series",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['limit']"
-								},
-								"sink": {
-									"name": "limit",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['offset']"
-								},
-								"sink": {
-									"name": "offset",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['total']"
-								},
-								"sink": {
-									"name": "total"
-								}
-							},
-							{
-								"source": {
 									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitId']"
 								},
 								"sink": {
