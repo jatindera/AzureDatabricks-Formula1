@@ -36,7 +36,129 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['MRData']['xmlns']"
+								},
+								"sink": {
+									"name": "xmlns",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['series']"
+								},
+								"sink": {
+									"name": "series",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['url']"
+								},
+								"sink": {
+									"name": "MRData_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['limit']"
+								},
+								"sink": {
+									"name": "limit",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['offset']"
+								},
+								"sink": {
+									"name": "offset",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['total']"
+								},
+								"sink": {
+									"name": "total"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitId']"
+								},
+								"sink": {
+									"name": "circuitId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['url']"
+								},
+								"sink": {
+									"name": "MRData_CircuitTable_Circuits'][0]['url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitName']"
+								},
+								"sink": {
+									"name": "circuitName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['lat']"
+								},
+								"sink": {
+									"name": "lat",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['long']"
+								},
+								"sink": {
+									"name": "long",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['locality']"
+								},
+								"sink": {
+									"name": "locality",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['country']"
+								},
+								"sink": {
+									"name": "country",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": ""
+					}
 				},
 				"inputs": [
 					{
