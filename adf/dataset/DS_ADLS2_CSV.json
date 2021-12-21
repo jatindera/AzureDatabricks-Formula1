@@ -27,35 +27,6 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"name": "circuitRef",
-				"type": "String"
-			},
-			{
-				"name": "name",
-				"type": "String"
-			},
-			{
-				"name": "location",
-				"type": "String"
-			},
-			{
-				"name": "country",
-				"type": "String"
-			},
-			{
-				"name": "lat",
-				"type": "String"
-			},
-			{
-				"name": "lng",
-				"type": "String"
-			},
-			{
-				"name": "url",
-				"type": "String"
-			}
-		]
+		"schema": []
 	}
 }
