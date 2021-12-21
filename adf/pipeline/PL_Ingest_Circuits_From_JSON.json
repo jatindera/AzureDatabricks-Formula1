@@ -41,10 +41,58 @@
 						"mappings": [
 							{
 								"source": {
+									"path": "['circuitId']"
+								},
+								"sink": {
+									"name": "circuitRef"
+								}
+							},
+							{
+								"source": {
+									"path": "['url']"
+								},
+								"sink": {
+									"name": "url"
+								}
+							},
+							{
+								"source": {
 									"path": "['circuitName']"
 								},
 								"sink": {
 									"name": "circuitName"
+								}
+							},
+							{
+								"source": {
+									"path": "['lat']"
+								},
+								"sink": {
+									"name": "lat"
+								}
+							},
+							{
+								"source": {
+									"path": "['long']"
+								},
+								"sink": {
+									"name": "lng"
+								}
+							},
+							{
+								"source": {
+									"path": "['locality']"
+								},
+								"sink": {
+									"name": "location"
+								}
+							},
+							{
+								"source": {
+									"path": "['country']"
+								},
+								"sink": {
+									"name": "country"
 								}
 							}
 						],
