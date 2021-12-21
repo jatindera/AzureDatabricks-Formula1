@@ -50,6 +50,14 @@
 							},
 							{
 								"source": {
+									"path": "['circuitName']"
+								},
+								"sink": {
+									"name": "name"
+								}
+							},
+							{
+								"source": {
 									"path": "['url']"
 								},
 								"sink": {
@@ -59,20 +67,11 @@
 							},
 							{
 								"source": {
-									"path": "['circuitName']"
-								},
-								"sink": {
-									"name": "circuitName",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "['lat']"
 								},
 								"sink": {
 									"name": "lat",
-									"type": "Double"
+									"type": "String"
 								}
 							},
 							{
