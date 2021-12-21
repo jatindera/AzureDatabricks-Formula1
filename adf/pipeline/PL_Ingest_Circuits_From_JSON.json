@@ -50,18 +50,6 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "\"url\":\"http://ergast.com/api/f1/circuits.json\"",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "\"url\":\"http://ergast.com/api/f1/circuits.json\"",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "\"CircuitTable\":{\"Circuits\":[{\"circuitId\":\"adelaide\"",
 									"type": "String",
 									"physicalType": "String"
