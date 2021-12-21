@@ -50,54 +50,6 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "\"url\":\"http://ergast.com/api/f1/circuits.json\"",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "\"url\":\"http://ergast.com/api/f1/circuits.json\"",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "\"limit\":\"100\"",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "\"limit\":\"100\"",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "\"offset\":\"0\"",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "\"offset\":\"0\"",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "\"total\":\"79\"",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "\"total\":\"79\"",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "\"CircuitTable\":{\"Circuits\":[{\"circuitId\":\"adelaide\"",
 									"type": "String",
 									"physicalType": "String"
@@ -6818,7 +6770,8 @@
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "JsonWriteSettings"
+							"type": "JsonWriteSettings",
+							"filePattern": "arrayOfObjects"
 						}
 					},
 					"enableStaging": false
