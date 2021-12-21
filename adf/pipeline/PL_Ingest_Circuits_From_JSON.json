@@ -41,58 +41,34 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitId']"
+									"path": "$['userId']"
 								},
 								"sink": {
-									"name": "circuitRef"
+									"name": "userId"
 								}
 							},
 							{
 								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['url']"
+									"path": "$['id']"
 								},
 								"sink": {
-									"name": "url"
+									"name": "id"
 								}
 							},
 							{
 								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitName']"
+									"path": "$['title']"
 								},
 								"sink": {
-									"name": "name"
+									"name": "title"
 								}
 							},
 							{
 								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['lat']"
+									"path": "$['body']"
 								},
 								"sink": {
-									"name": "lat"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['long']"
-								},
-								"sink": {
-									"name": "lng"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['locality']"
-								},
-								"sink": {
-									"name": "location"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['country']"
-								},
-								"sink": {
-									"name": "country"
+									"name": "body"
 								}
 							}
 						],
