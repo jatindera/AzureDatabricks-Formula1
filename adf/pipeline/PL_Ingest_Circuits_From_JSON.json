@@ -41,14 +41,15 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitId']"
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitName']"
 								},
 								"sink": {
-									"name": "circuitRef"
+									"name": "circuitName"
 								}
 							}
 						],
-						"collectionReference": "$['MRData']['CircuitTable']['Circuits']"
+						"collectionReference": "$['MRData']['CircuitTable']['Circuits']",
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
