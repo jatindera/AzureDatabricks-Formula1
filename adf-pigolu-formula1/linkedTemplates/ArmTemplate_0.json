@@ -1,0 +1,356 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-pigolu-formula1"
+		},
+		"LS_SQLSERVER_LOCAL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQLSERVER_LOCAL'"
+		},
+		"LS_ADLS2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adls2pigolu.dfs.core.windows.net"
+		},
+		"LS_HTTP_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().base_url}"
+		},
+		"LS_KeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://pigolu-kv.vault.azure.net/"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_ADLS2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_ADLS2_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_HTTP')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked Service to get F1 data from Ergast",
+				"parameters": {
+					"base_url": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('LS_HTTP_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_KeyVault')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked Service for Key Vault",
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('LS_KeyVault_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LocalSHIR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_ADLS2_Binary_XML')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLS2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"circuits_file_name": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().circuits_file_name",
+							"type": "Expression"
+						},
+						"folderPath": "RAW",
+						"fileSystem": "formula1"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_ADLS2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_HTTP_Binary_XML')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_HTTP",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"base_url": {
+							"value": "@dataset().base_url",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"base_url": {
+						"type": "string"
+					},
+					"relative_url": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@dataset().relative_url",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_HTTP')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_SQLSERVER_LOCAL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_SQLSERVER_LOCAL_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "LocalSHIR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/LocalSHIR')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_CIRCUITS_XML_TO_CSV')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Formula1"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "LS_ADLS2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "XMLFromADLS2"
+						}
+					],
+					"sinks": [
+						{
+							"linkedService": {
+								"referenceName": "LS_ADLS2",
+								"type": "LinkedServiceReference"
+							},
+							"name": "SaveAsCSV"
+						}
+					],
+					"transformations": [
+						{
+							"name": "FlattenCircuit"
+						},
+						{
+							"name": "SortByName"
+						}
+					],
+					"script": "source(output(\n\t\t{F1:MRData} as ({@limit} as short, {@offset} as boolean, {@series} as string, {@total} as short, {@url} as string, {F1:CircuitTable} as ({F1:Circuit} as ({@circuitId} as string, {@url} as string, {F1:CircuitName} as string, {F1:Location} as ({@lat} as double, {@long} as double, {F1:Country} as string, {F1:Locality} as string))[]))\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'xml',\n\tfileSystem: 'formula1',\n\tfolderPath: 'RAW',\n\tfileName: 'circuits.xml',\n\tvalidationMode: 'none',\n\tnamespaces: true,\n\tnamespacePrefixes: ['http://ergast.com/mrd/1.4'->'F1'],\n\tpartitionBy('hash', 1)) ~> XMLFromADLS2\nXMLFromADLS2 foldDown(unroll({F1:MRData}.{F1:CircuitTable}.{F1:Circuit}),\n\tmapColumn(\n\t\tcircuitRef = {F1:MRData}.{F1:CircuitTable}.{F1:Circuit}.{@circuitId},\n\t\tname = {F1:MRData}.{F1:CircuitTable}.{F1:Circuit}.{F1:CircuitName},\n\t\tlocation = {F1:MRData}.{F1:CircuitTable}.{F1:Circuit}.{F1:Location}.{F1:Locality},\n\t\tcountry = {F1:MRData}.{F1:CircuitTable}.{F1:Circuit}.{F1:Location}.{F1:Country},\n\t\tlat = {F1:MRData}.{F1:CircuitTable}.{F1:Circuit}.{F1:Location}.{@lat},\n\t\tlng = {F1:MRData}.{F1:CircuitTable}.{F1:Circuit}.{F1:Location}.{@long},\n\t\turl = {F1:MRData}.{F1:CircuitTable}.{F1:Circuit}.{@url}\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenCircuit\nFlattenCircuit sort(asc(name, true),\n\tcaseInsensitive: true,\n\tpartitionBy('hash', 1)) ~> SortByName\nSortByName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'delimited',\n\tfileSystem: 'formula1',\n\tfolderPath: 'RAW/ADF',\n\tcolumnDelimiter: ',',\n\tescapeChar: '\\\\',\n\tquoteChar: '\\\"',\n\tcolumnNamesAsHeader: true,\n\tpartitionFileNames:['circuits.csv'],\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> SaveAsCSV"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_ADLS2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_Get_Circuits')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Circuits XML to CSV",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Save Circuits XML on ADLS2",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_CIRCUITS_XML_TO_CSV",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"XMLFromADLS2": {},
+									"SaveAsCSV": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "Save Circuits XML on ADLS2",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "HttpReadSettings",
+									"requestMethod": "GET"
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_HTTP_Binary_XML",
+								"type": "DatasetReference",
+								"parameters": {
+									"base_url": {
+										"value": "@pipeline().parameters.pl_base_url",
+										"type": "Expression"
+									},
+									"relative_url": {
+										"value": "@pipeline().parameters.pl_relative_url",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_ADLS2_Binary_XML",
+								"type": "DatasetReference",
+								"parameters": {
+									"circuits_file_name": {
+										"value": "@pipeline().parameters.pl_circuits_file_name",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"pl_base_url": {
+						"type": "string",
+						"defaultValue": "http://ergast.com/api/f1/"
+					},
+					"pl_relative_url": {
+						"type": "string",
+						"defaultValue": "circuits"
+					},
+					"pl_circuits_file_name": {
+						"type": "String",
+						"defaultValue": "circuits.xml"
+					}
+				},
+				"folder": {
+					"name": "Formula1"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/DF_CIRCUITS_XML_TO_CSV')]",
+				"[concat(variables('factoryId'), '/datasets/DS_HTTP_Binary_XML')]",
+				"[concat(variables('factoryId'), '/datasets/DS_ADLS2_Binary_XML')]"
+			]
+		}
+	]
+}
