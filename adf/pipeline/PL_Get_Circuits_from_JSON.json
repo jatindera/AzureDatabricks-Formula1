@@ -1,6 +1,68 @@
 {
 	"name": "PL_Get_Circuits_from_JSON",
 	"properties": {
+		"activities": [
+			{
+				"name": "Save Circuits CSV on ADLS2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_HTTP_Binary_XML",
+						"type": "DatasetReference",
+						"parameters": {
+							"base_url": {
+								"value": "@pipeline().parameters.pl_base_url",
+								"type": "Expression"
+							},
+							"relative_url": {
+								"value": "@pipeline().parameters.pl_relative_url_xml",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS2_Binary_XML",
+						"type": "DatasetReference",
+						"parameters": {
+							"circuits_file_name": {
+								"value": "@pipeline().parameters.pl_circuits_file_name",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
 		"folder": {
 			"name": "Formula1"
 		},
