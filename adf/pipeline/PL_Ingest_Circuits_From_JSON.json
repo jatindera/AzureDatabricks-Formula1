@@ -68,15 +68,6 @@
 							},
 							{
 								"source": {
-									"path": "$['MRData']['url']"
-								},
-								"sink": {
-									"name": "MRData_url",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['MRData']['limit']"
 								},
 								"sink": {
