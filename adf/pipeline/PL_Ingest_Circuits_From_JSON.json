@@ -108,7 +108,7 @@
 								"type": "Expression"
 							},
 							"relative_url": {
-								"value": "@pipeline().parameters.pl_file_name_json",
+								"value": "@pipeline().parameters.pl_relative_url",
 								"type": "Expression"
 							}
 						}
@@ -133,7 +133,7 @@
 				"type": "string",
 				"defaultValue": "https://ergast.com/api/f1/"
 			},
-			"pl_relative_url": {
+			"pl_relative_url_json": {
 				"type": "string",
 				"defaultValue": "circuits.json?limit=100"
 			},
@@ -141,9 +141,9 @@
 				"type": "string",
 				"defaultValue": "circuits.csv"
 			},
-			"pl_file_name_json": {
+			"pl_relative_url_xml": {
 				"type": "string",
-				"defaultValue": "circuits.json"
+				"defaultValue": "circuits?limit=100"
 			}
 		},
 		"folder": {
