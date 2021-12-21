@@ -56,6 +56,14 @@
 							},
 							{
 								"source": {
+									"path": "['circuitName']"
+								},
+								"sink": {
+									"path": "name"
+								}
+							},
+							{
+								"source": {
 									"path": "['Location']['lat']"
 								},
 								"sink": {
