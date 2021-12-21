@@ -57,7 +57,13 @@
 				"outputs": [
 					{
 						"referenceName": "DS_ADLS2_CSV",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"file_name": {
+								"value": "@pipeline().parameters.pl_file_name",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
