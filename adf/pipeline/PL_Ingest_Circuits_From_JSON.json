@@ -59,10 +59,19 @@
 							},
 							{
 								"source": {
-									"path": "['url']"
+									"path": "['locality']"
 								},
 								"sink": {
-									"name": "url",
+									"name": "location",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['country']"
+								},
+								"sink": {
+									"name": "country",
 									"type": "String"
 								}
 							},
@@ -86,19 +95,10 @@
 							},
 							{
 								"source": {
-									"path": "['locality']"
+									"path": "['url']"
 								},
 								"sink": {
-									"name": "location",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['country']"
-								},
-								"sink": {
-									"name": "country",
+									"name": "url",
 									"type": "String"
 								}
 							}
