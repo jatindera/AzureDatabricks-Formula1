@@ -25,13 +25,14 @@
 						}
 					},
 					"sink": {
-						"type": "JsonSink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "JsonWriteSettings",
-							"filePattern": "setOfObjects"
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false,
@@ -43,7 +44,7 @@
 									"path": "$['userId']"
 								},
 								"sink": {
-									"path": "userId"
+									"name": "userId"
 								}
 							},
 							{
@@ -51,7 +52,7 @@
 									"path": "$['id']"
 								},
 								"sink": {
-									"path": "id"
+									"name": "id"
 								}
 							},
 							{
@@ -59,7 +60,7 @@
 									"path": "$['title']"
 								},
 								"sink": {
-									"path": "title"
+									"name": "title"
 								}
 							},
 							{
@@ -67,7 +68,7 @@
 									"path": "$['body']"
 								},
 								"sink": {
-									"path": "body"
+									"name": "body"
 								}
 							}
 						],
@@ -92,7 +93,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_ADLS2_JSON",
+						"referenceName": "DS_ADLS2_CSV",
 						"type": "DatasetReference",
 						"parameters": {
 							"file_name": {
