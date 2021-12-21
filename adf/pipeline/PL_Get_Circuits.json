@@ -49,6 +49,12 @@
 							"type": "BinaryReadSettings"
 						}
 					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
 					"enableStaging": false
 				},
 				"inputs": [
@@ -62,6 +68,18 @@
 							},
 							"relative_url": {
 								"value": "@pipeline().parameters.pl_relative_url",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS2_Binary_XML",
+						"type": "DatasetReference",
+						"parameters": {
+							"circuits_file_name": {
+								"value": "@pipeline().parameters.pl_circuits_file_name",
 								"type": "Expression"
 							}
 						}
