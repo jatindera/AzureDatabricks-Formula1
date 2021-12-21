@@ -25,6 +25,17 @@
 							"type": "JsonReadSettings"
 						}
 					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
 					"enableStaging": false
 				},
 				"inputs": [
@@ -42,6 +53,12 @@
 							}
 						}
 					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS2_CSV",
+						"type": "DatasetReference"
+					}
 				]
 			}
 		],
@@ -53,6 +70,10 @@
 			"pl_relative_url": {
 				"type": "string",
 				"defaultValue": "circuits.json?limit=100"
+			},
+			"pl_file_name": {
+				"type": "string",
+				"defaultValue": "circuits.csv"
 			}
 		},
 		"folder": {
