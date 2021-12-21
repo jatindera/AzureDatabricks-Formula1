@@ -45,7 +45,8 @@
 									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitId']"
 								},
 								"sink": {
-									"name": "circuitId"
+									"name": "circuitId",
+									"type": "String"
 								}
 							},
 							{
@@ -53,7 +54,8 @@
 									"path": "$['MRData']['CircuitTable']['Circuits'][0]['url']"
 								},
 								"sink": {
-									"name": "MRData_CircuitTable_Circuits'][0]['url"
+									"name": "MRData_CircuitTable_Circuits'][0]['url",
+									"type": "String"
 								}
 							},
 							{
@@ -61,7 +63,8 @@
 									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitName']"
 								},
 								"sink": {
-									"name": "circuitName"
+									"name": "circuitName",
+									"type": "String"
 								}
 							},
 							{
@@ -69,7 +72,8 @@
 									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['lat']"
 								},
 								"sink": {
-									"name": "lat"
+									"name": "lat",
+									"type": "Double"
 								}
 							},
 							{
@@ -77,7 +81,8 @@
 									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['long']"
 								},
 								"sink": {
-									"name": "long"
+									"name": "long",
+									"type": "Double"
 								}
 							},
 							{
@@ -85,7 +90,8 @@
 									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['locality']"
 								},
 								"sink": {
-									"name": "locality"
+									"name": "locality",
+									"type": "String"
 								}
 							},
 							{
@@ -93,7 +99,8 @@
 									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['country']"
 								},
 								"sink": {
-									"name": "country"
+									"name": "country",
+									"type": "String"
 								}
 							}
 						]
