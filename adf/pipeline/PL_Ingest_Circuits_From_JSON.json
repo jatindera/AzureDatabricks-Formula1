@@ -81,7 +81,7 @@
 								},
 								"sink": {
 									"name": "lng",
-									"type": "Double"
+									"type": "String"
 								}
 							},
 							{
