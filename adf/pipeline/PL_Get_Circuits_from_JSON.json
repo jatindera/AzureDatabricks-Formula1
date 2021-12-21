@@ -26,12 +26,78 @@
 						}
 					},
 					"sink": {
-						"type": "BinarySink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['MRData']['url']"
+								},
+								"sink": {
+									"name": "url"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitId']"
+								},
+								"sink": {
+									"name": "circuitRef"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitName']"
+								},
+								"sink": {
+									"name": "name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['lat']"
+								},
+								"sink": {
+									"name": "lat"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['long']"
+								},
+								"sink": {
+									"name": "lng"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['locality']"
+								},
+								"sink": {
+									"name": "location"
+								}
+							},
+							{
+								"source": {
+									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['country']"
+								},
+								"sink": {
+									"name": "country"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
@@ -51,14 +117,8 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_ADLS2_Binary_XML",
-						"type": "DatasetReference",
-						"parameters": {
-							"circuits_file_name": {
-								"value": "@pipeline().parameters.pl_circuits_file_name",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "DS_ADLS2_CSV",
+						"type": "DatasetReference"
 					}
 				]
 			}
