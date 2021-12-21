@@ -55,7 +55,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "url"
+									"name": "\"url\":\"http://ergast.com/api/f1/circuits.json\"",
+									"type": "String",
+									"physicalType": "String"
 								}
 							},
 							{
@@ -65,7 +67,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "circuitRef"
+									"name": "{\"circuitId\":\"ain-diab\"",
+									"type": "String",
+									"physicalType": "String"
 								}
 							}
 						],
