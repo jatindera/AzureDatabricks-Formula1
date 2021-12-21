@@ -81,7 +81,7 @@
 								},
 								"sink": {
 									"name": "lat",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
@@ -90,7 +90,7 @@
 								},
 								"sink": {
 									"name": "lng",
-									"type": "String"
+									"type": "Double"
 								}
 							},
 							{
