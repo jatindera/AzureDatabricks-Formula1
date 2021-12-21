@@ -1,0 +1,20 @@
+{
+	"name": "LS_REST",
+	"properties": {
+		"parameters": {
+			"base_url": {
+				"type": "String"
+			},
+			"relative_url": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "@{concat(linkedService().base_url, linkedService().relative_url)}",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
