@@ -59,7 +59,7 @@
 							},
 							{
 								"source": {
-									"path": "['location']['locality']"
+									"path": "['Location']['locality']"
 								},
 								"sink": {
 									"name": "location",
@@ -68,7 +68,7 @@
 							},
 							{
 								"source": {
-									"path": "['location']['country']"
+									"path": "['Location']['country']"
 								},
 								"sink": {
 									"name": "country",
@@ -77,7 +77,7 @@
 							},
 							{
 								"source": {
-									"path": "['location']['lat']"
+									"path": "['Location']['lat']"
 								},
 								"sink": {
 									"name": "lat",
@@ -86,7 +86,7 @@
 							},
 							{
 								"source": {
-									"path": "['location']['long']"
+									"path": "['Location']['long']"
 								},
 								"sink": {
 									"name": "lng",
