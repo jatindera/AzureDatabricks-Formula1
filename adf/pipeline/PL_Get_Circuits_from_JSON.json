@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "BinarySource",
+						"type": "JsonSource",
 						"storeSettings": {
 							"type": "HttpReadSettings",
 							"requestMethod": "GET"
 						},
 						"formatSettings": {
-							"type": "BinaryReadSettings"
+							"type": "JsonReadSettings"
 						}
 					},
 					"sink": {
@@ -35,18 +35,8 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_HTTP_Binary_XML",
-						"type": "DatasetReference",
-						"parameters": {
-							"base_url": {
-								"value": "@pipeline().parameters.pl_base_url",
-								"type": "Expression"
-							},
-							"relative_url": {
-								"value": "@pipeline().parameters.pl_relative_url_json",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "DS_HTTP_JSON",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
