@@ -5,7 +5,14 @@
 			{
 				"name": "Save JSON as CSV to ADLS2",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Save JSON to ADLS2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -16,13 +23,14 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "JsonSource",
+						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings"
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -157,20 +165,20 @@
 								}
 							}
 						],
-						"collectionReference": ""
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
 					}
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_HTTP_JSON",
+						"referenceName": "DS_ADLS2_CSV",
 						"type": "DatasetReference",
 						"parameters": {
-							"base_url": {
-								"value": "@pipeline().parameters.pl_base_url",
-								"type": "Expression"
-							},
-							"relative_url": {
-								"value": "@pipeline().parameters.pl_relative_url",
+							"file_name": {
+								"value": "@pipeline().parameters.pl_file_name_json",
 								"type": "Expression"
 							}
 						}
@@ -182,7 +190,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"file_name": {
-								"value": "@pipeline().parameters.pl_file_name",
+								"value": "@pipeline().parameters.pl_file_name_csv",
 								"type": "Expression"
 							}
 						}
@@ -223,129 +231,7 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['MRData']['xmlns']"
-								},
-								"sink": {
-									"name": "xmlns",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['series']"
-								},
-								"sink": {
-									"name": "series",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['url']"
-								},
-								"sink": {
-									"name": "MRData_url",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['limit']"
-								},
-								"sink": {
-									"name": "limit",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['offset']"
-								},
-								"sink": {
-									"name": "offset",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['total']"
-								},
-								"sink": {
-									"name": "total"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitId']"
-								},
-								"sink": {
-									"name": "circuitId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['url']"
-								},
-								"sink": {
-									"name": "MRData_CircuitTable_Circuits'][0]['url",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['circuitName']"
-								},
-								"sink": {
-									"name": "circuitName",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['lat']"
-								},
-								"sink": {
-									"name": "lat",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['long']"
-								},
-								"sink": {
-									"name": "long",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['locality']"
-								},
-								"sink": {
-									"name": "locality",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['MRData']['CircuitTable']['Circuits'][0]['Location']['country']"
-								},
-								"sink": {
-									"name": "country",
-									"type": "String"
-								}
-							}
-						],
-						"collectionReference": ""
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
@@ -369,7 +255,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"file_name": {
-								"value": "@pipeline().parameters.pl_file_name",
+								"value": "@pipeline().parameters.pl_file_name_json",
 								"type": "Expression"
 							}
 						}
