@@ -1,5 +1,5 @@
 {
-	"name": "PL_Get_Circuits",
+	"name": "PL_Ingest_Circuits_From_XML",
 	"properties": {
 		"activities": [
 			{
