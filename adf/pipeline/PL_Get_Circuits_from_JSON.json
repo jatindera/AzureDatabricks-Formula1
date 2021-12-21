@@ -133,7 +133,7 @@
 				"type": "string",
 				"defaultValue": "circuits.json?limit=100"
 			},
-			"pl_circuits_file_name": {
+			"pl_file_name": {
 				"type": "string",
 				"defaultValue": "circuits.csv"
 			}
